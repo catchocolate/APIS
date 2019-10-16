@@ -1,0 +1,47 @@
+写这个是为了在分享到Facebook的时候， 
+在没有爬到页面数据或者想自定义一些语句的情况下
+怎么定义文字
+
+<body>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v4.0"></script>
+
+<script>
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId: your-id,
+            cookie: true,
+            xfbml: true,
+            version: 'v2.9',
+        });
+    };
+    (function(d, s, id) {
+        let js,
+            fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = '//connect.facebook.net/en_US/sdk.js';
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<script>
+    var question = "<?=$question ?>"; //这个是从PHP中调用的变量
+    window.share = function(){
+        window.FB.ui({
+            method: 'share',
+            href: "https://deco7180-c02t09.uqcloud.net/",
+            quote: "please help me with this question:\n" +
+                    question,
+        }, function() {
+        });
+    };
+</script>
+
+<a class="social-media"  onclick="share()">Share</a> //用onclick调用function
+</body>
+
+
+
+note: 
+这种情况不适用于share button,只能自定义外观
